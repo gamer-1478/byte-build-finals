@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <header class="navbar-container">
     <nav class="navbar">
-        <a href="/" class="nav-branding"><img width="50px"
-                src="/logo.png"></a>
+        <a href="/" class="nav-branding"><img width="50px" src="/logo.png"></a>
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="/map" class="nav-link">Map</a>
+                <a href="/store?type=new" class="nav-link">New Products</a>
             </li>
             <li class="nav-item">
-                <a href="/gym" class="nav-link">Gym</a>
+                <a href="/store?type=indian" class="nav-link">Indian</a>
             </li>
             <li class="nav-item">
-                <a href="/feed" class="nav-link">Feed</a>
+                <a href="/store?type=western" class="nav-link">Western</a>
             </li>
             <li class="nav-item">
-                <a href="/pokedex" class="nav-link">Registered Pokemons</a>
-            </li>
-            <li class="nav-item">
-                <a href="/store" class="nav-link">Store</a>
+                <a href="/store?type=snacks" class="nav-link">Snacks</a>
             </li>
             <% if (typeof user != "undefined"){ %>
             <% } else { %>
