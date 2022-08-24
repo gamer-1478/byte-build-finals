@@ -7,8 +7,8 @@ const express = require('express'),
 router.get('/', async (req, res) => {
     const user = await User.findOne({ userId: req.user.userId })
     let orders = []
-    await user.orders.forEach(async order => {
-        let foundOrder = await Order.findOne({ orderId: order })
+    for (let i = 0; i < user.orders.length; i++) {
+        let foundOrder = await Order.findOne({ orderId: user.orders[i] })
         foundOrder = foundOrder.toObject()
         var total = 0;
         var products = foundOrder.cart.map(async (product_orig) => {
@@ -18,34 +18,33 @@ router.get('/', async (req, res) => {
             product.quantity = product_orig.quan
             return product;
         })
-        Promise.all(products).then(products => {
+        Promise.all(await products).then(async products => {
             foundOrder.cart = products
-            console.log(foundOrder.cart)
             foundOrder.total = total
             orders.push(foundOrder)
-        })
-    })
-    function render() {
-        res.render('store/orders', {
-            orders, user: req.user
+            if (i == user.orders.length-1) {
+                var orderslist = await NewtestArray(orders)
+                res.render('store/orders', {
+                    orderslist, user: req.user
+                })
+            };
         })
     }
-    setTimeout(render, 1000);
 })
 
 router.get('/:id', async (req, res) => {
-    const order = await Order.findOne({orderId: req.params.id})
+    const order = await Order.findOne({ orderId: req.params.id })
     let products = []
     let total = 0
-    order.cart.map(async product =>{
-        let foundProd = await Product.findOne({productId: product.prodid})
+    order.cart.map(async product => {
+        let foundProd = await Product.findOne({ productId: product.prodid })
         products.push(foundProd)
     })
-    
 
-      function render() {
+
+    function render() {
         products.map(product => {
-            total+=product.price*product.quantity
+            total += product.price * product.quantity
         })
         res.render('store/order_single', {
             products, user: req.user, total
@@ -57,3 +56,28 @@ router.get('/:id', async (req, res) => {
 
 module.exports = router
 
+// helper function to make array of products
+async function NewtestArray(products) {
+    var testArray = []
+    var prodLen = products.length
+    var i = 0
+
+    if (prodLen == 0) {
+        return testArray;
+    }
+
+    var NewtestArray = await new Promise((resolve, reject) => {
+        while (i < prodLen) {
+            i += 2
+            testArray.push(products.splice(0, 3))
+
+            if (i >= prodLen - 1) {
+                resolve(testArray)
+            }
+            else {
+                resolve(testArray)
+            }
+        }
+    }).then(res => { return res })
+    return NewtestArray
+}

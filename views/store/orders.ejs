@@ -1,24 +1,68 @@
-<div class="orderlist">
-    <% orders.map(order=>{%>
-    <a href="/orders/<%-order.orderId%> ">
-    <div class="list-item">
-        <h3> Name: <%=order.name%> </h3>
-        <h4>Address</h4>
-        <p> <%=order.line1%> </p>
-        <p> <%=order.line2%> </p>
-        <p> <%=order.line3%> </p>
-        <p> Ordered on: <strong><%=order.date%></strong> </p>
-        <% if(!order.status){%> 
-            <a href="<%=order.payment_link%>">Pay Now</a>
-        <% } %> 
+<div class="order-page">
+    <h1 class="title">Your Orders</h1>
 
+    <% orderslist.map(orders => { %>
+    <div class="orderlist">
+        <% orders.map(order=>{%>
+            <div class="list-item" onclick="new function(){window.location.href = '/orders/<%-order.orderId%>'}">
+                <h2> Total: <%=order.total%></h2>
+                <div class="list-item-main">
+                    <p> Ordered on: <strong><%=order.date%></strong> </p>
+                    <% if(!order.status){%>
+                    <p> Status: <span class="pending">Payment Pending</span> </p>
+                    <button class="pay-later"
+                        onclick='new function(){window.location.href = "<%=order.payment_link%>";
+                        event.stopPropagation();}'>Pay Now</button>
+                    <% } else {%>
+                    <p> Status: <span class="done">Payment Complete</span> </p>
+                    <% } %>
+                </div>
+            </div>
+        </a>
+        <%}) %>
     </div>
-</a>
     <%}) %>
-    
 </div>
 
 <style>
+    .pay-later {
+        z-index: 1;
+        width: max-content;
+        height: max-content;
+        margin-top: 20px;
+        padding: 6px;
+        background: #111;
+        color: #eee;
+        cursor: pointer;
+        font-size: 19px;
+        border: none;
+        border-radius: 7px;
+    }
+
+    .list-item-main {
+        margin-top: 20px;
+    }
+
+    .pending {
+        color: red;
+    }
+
+    .done {
+        color: #16e16e;
+    }
+
+    .title {
+        text-align: center;
+        margin: 20px;
+    }
+
+    .order-page {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
     .orderlist {
         display: flex;
         flex-direction: row;
@@ -29,6 +73,7 @@
     }
 
     .list-item {
+        z-index: 0;
         width: 300px;
         min-height: 200px;
         background-color: #eee;
@@ -42,11 +87,13 @@
         border-radius: 10px;
         margin-top: 10px;
     }
-    a{
+
+    a {
         text-decoration: none;
         color: black;
     }
-    a:hover{
+
+    a:hover {
         text-decoration: none;
     }
 </style>
