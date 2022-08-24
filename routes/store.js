@@ -15,4 +15,5 @@ router.get('/admin/create/:id', ensureAdminAuthenticated, store_admin_get_produc
 router.post('/admin/edit/:id', ensureAdminAuthenticated,  store_admin_post_product)
 router.post('/admin/delete/:id', ensureAdminAuthenticated, store_admin_delete_product)
 
+
 module.exports = router;
