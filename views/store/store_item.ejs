@@ -12,7 +12,7 @@
         <h2 class="price"> ₹ <%= product.price %> </h2>
         <div class="buy-form" method="post">
             <input type="number" placeholder="Qty." id="qty" name="qty" min="1" max="<%= product.quantity %>" value="1">
-            <button class="buy-button" onclick="submit()">Buy</button>
+            <button class="buy-button" onclick="submit()">Add To Cart</button>
         </div>
     </div>
 </div>
@@ -24,7 +24,7 @@
     }
 
     .buy-button {
-        width: 100px;
+        width: 150px;
         height: 50px;
         background: #111;
         color: #eee;
