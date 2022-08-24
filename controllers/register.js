@@ -37,9 +37,18 @@ const auth_register_post = async (req, res) => {
           if (err) throw err;
           newUser.password = hash;
           newUser.save().then((user) => {
-            user = JSON.parse(JSON.stringify(user));
-            user.success = true;
-            res.send(user)
+            User.findOne({ email: req.body.email }).then(user => {
+              passport.authenticate('local', (err, user, info) => {
+                if (err) throw err;
+                if (!user) res.send([{ msg: info.message }]);
+                else {
+                  req.logIn(user, (err) => {
+                    if (err) throw err;
+                    res.send([{ msg: "Successfully Authenticated", sucess: true }]);
+                  });
+                }
+              })(req, res, next);
+            })
           }).catch((err) => console.log(err));
         })
       );
