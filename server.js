@@ -24,6 +24,7 @@ const landing = require('./routes/landing.js'),
     product = require('./routes/product.js'),
     review = require('./routes/review.js'),
     orders = require('./routes/orders.js');
+    profile = require('./routes/profile.js');
 
 const app = express(),
     PORT = process.env.PORT || 5000;
@@ -63,6 +64,7 @@ app.use('/store', store)
 app.use('/checkout', checkout)
 app.use('/review', review)
 app.use('/orders', orders)
+app.use('/profile', profile)
 
 app.get('/404', (req, res) => {
     res.render('404', { user: req.user })
