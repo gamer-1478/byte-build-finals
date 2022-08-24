@@ -17,7 +17,6 @@ const orderSchema = new mongoose.Schema({
     userId: reqString,
     status: {type: Boolean, default: false},
     cart: [{ prodid: nonreqString, quan: 0 }],
-
 })
 
-module.exports = mongoose.model("Order", orderSchema)
+module.exports = mongoose.model("Order", orderSchema);

@@ -1,16 +1,61 @@
-<div class="dashboard-container">
-    <h1>Dashboard</h1>
-    <h2>Welcome <%= user.name %>! </h2><br><br><br>
-    <a href="/orders">Previous Orders</a>
-    <a href="/auth/logout">Logout</a>
+<div class="main-div">
+    <div class="dashboard-container">
+        <h1 class="dash-title">Dashboard</h1>
+        <h2 class="dash-your"><%= user.name %>'s Account </h2><br><br><br>
+        <div class="dash-button-list-container">
+            <div class="dash-button-list">
+                <button>Previous Orders</button>
+                <button>Payment Options</button>
+                <button>Your Adresses</button>
+            </div>
+            <div class="dash-button-list">
+                <button>Contact Us</button>
+                <button>Misepal Balance</button>
+                <button>Your Adresses</button>
+            </div>
+        </div>
+        <a href="/orders"></a>
+        <a href="/auth/logout">Logout</a>
+    </div>
 </div>
-
 <style>
-    .dashboard-container {
+    .dash-button-list-container {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
     }
 
+    .dash-button-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .dash-your {
+        font-size: 24px;
+        font-weight: 600;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .main-div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .dash-title {
+        text-align: center;
+        font-size: 52px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 300;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .dashboard-container {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
 </style>
