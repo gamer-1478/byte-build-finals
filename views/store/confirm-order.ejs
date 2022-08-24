@@ -1,1 +1,125 @@
+<div class="subtotal">
+    <h1 class="subtotal-title">Subtotal</h1>
+    <h3> ₹<%=total%></h3>
+    <div class="subtotal-cart">
+        <% if (cart.length > 0) { %>
+        <% for (let i = 0; i < cart.length; i++) { %>
+        <div class="subtotal-value"><span class="bold"><%= cart[i].name %>:</span>
+            ₹<%= cart[i].quantity*cart[i].price %>
+        </div>
+        <% } %>
+        <% } else { %>
+        <div class="subtotal-value">₹0</div>
+        <% } %>
+    </div>
+</div>
+
+
 <h1>Thank you! Your order has been confirmed</h1>
+
+<style>
+    .checkout-container {
+        width: 100%;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .click-here {
+        color: #393E47;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .signup-button {
+        margin-top: 20px;
+        background-color: #393E47;
+        color: white;
+        border-radius: 5px;
+        width: max-content;
+        height: 50px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .field {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    input {
+        width: 300px;
+        height: 30px;
+        border-radius: 15px;
+        border: 1px solid #BBBBBB;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: transparent;
+    }
+
+    .signup-form {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .signup {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .landing-class {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 90px);
+    }
+</style>
+
+
+<style>
+    .subtotal-cart {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 80%;
+    }
+
+    .subtotal-title {
+        margin-top: 20px;
+    }
+
+    .subtotal {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        min-height: 25vh;
+        background-color: #eee;
+        border-radius: 10px;
+        padding: 10px;
+        padding-left: 30px;
+        margin-top: 100px;
+    }
+
+    @media screen and (max-width: 770px) {
+        .subtotal {
+            width: 80%;
+            min-height: 25vh;
+            background-color: #eee;
+            border-radius: 10px;
+            padding: 10px;
+            padding-left: 30px;
+            margin-top: 150px;
+        }
+    }
+</style>

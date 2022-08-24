@@ -53,6 +53,9 @@ router.post('/', ensureAuthenticated, async (req, res) => {
     const stripe_hidden = nanoid() + nanoid()
     const link = await paymentLink(stripe_hidden, req);
 
+    if (!line1 || !line2 || line3 || !name) {
+        return res.send({message: "Please fill in all fields", success: false})
+    }
     const newOrder = new Order({
         name,
         orderId,
