@@ -1,17 +1,57 @@
 <div>
-    <form action="/profile" method="post">
-        <input type="text" id="name" name="name" value="<%-user.name%>" required="true">
-        <br><br>
-        <input type="text" id="email" name="email" value="<%-user.email%>" required="true">
-        <br><br>
-        <a href="/orders"> <h3>Previous orders</h3></a>
-        <br>
-        <button type="submit">Update Profile</button>  
-    </form>
+    <div class="wrapper">
+        <h1>Hello <%=user.name%>!</h1>
+        <form action="/profile" method="post">
+            <input type="text" id="name" name="name" value="<%-user.name%>" required="true">
+            <br><br>
+            <input type="text" id="email" name="email" value="<%-user.email%>" required="true">
+            <br><br>
+            <a href="/orders"> <h3>Previous orders</h3></a>
+            <br>
+            <button type="submit">Update Profile</button>  
+        </form>
+    </div>
 </div>
 
 <style>
+    h1{
+        margin-top: 50px;
+        font-family: 'Inter';
+        font-size: 3rem;
+    }
+    .wrapper{
+        text-align: center;
+        align-content: center;
+    }
+    form{
+        margin-top: 60px;
+    }
     input{
+        border-radius: 25px;
+        border: 2px solid #111;
+        padding: 5px;
         font-size: 25px;
     }
+    a{
+        text-decoration: underline;
+        color: #111;
+        font-family: 'Inter';
+        font-weight: 500;
+        font-size: 2rem;
+    }
+    button {
+        font-size: 1.5rem;
+        width: 200px;
+        height: 50px;
+        transition-duration: 0.4s;
+        background-color: white;
+        color: black;
+        border: 2px solid #4CAF50; /* Green */
+    }
+
+    button:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    }
+
 </style>
