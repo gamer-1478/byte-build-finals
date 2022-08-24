@@ -11,6 +11,11 @@ const productSchema = new mongoose.Schema({
     productId: reqString,
     image: notreqString,
     price: reqNum,
+    reviews:[{
+        rating: reqNum,
+        comment: notreqString,
+        verified: {type: Boolean, default: false, required: true}
+    }]
 })
 
 module.exports = mongoose.model("Product", productSchema)

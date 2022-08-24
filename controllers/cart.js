@@ -1,5 +1,6 @@
 const Product = require("../schemas/productSchema"),
     User = require("../schemas/userSchema"),
+    {nanoid} = require("nanoid")
 
 const cart_get = (req, res)=> {
     if (!req.user.cart.length > 0) {
@@ -40,8 +41,15 @@ const cart_quantity_change = (req, res)=> {
     res.send({ success: true });
 }
 
-const admin_add_product = (req, res) => {
-    
+const quantity_post = (req, res)=> {
+    var id = req.params.id;
+    var cart = req.user.cart;
+    var index = cart.findIndex(product => product.prodid === id);
+    cart[index].quan = req.body.quantity;
+    req.user.cart = cart;
+    req.user.save();
+    res.send({ success: true });
 }
 
-module.exports = {cart_get, cart_delete, cart_quantity_change}
+
+module.exports = {cart_get, cart_delete, cart_quantity_change, quantity_post}

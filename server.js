@@ -17,6 +17,9 @@ const express = require('express'),
 const landing = require('./routes/landing.js'),
     auth = require('./routes/auth.js'),
     admin = require('./routes/admin.js');
+    cart = require('./routes/cart.js');
+    product = require('./routes/product.js');
+    review = require('./routes/review.js');
 
 const app = express(),
     PORT = process.env.PORT || 5000;
@@ -50,6 +53,8 @@ app.use(passport.session())
 app.use('/', landing) //done
 app.use('/auth', auth) //domne
 app.use('/admin', admin) //add pages
+app.use('/cart', cart) 
+app.use('/review', review) 
 
 app.get('/404', (req, res) => {
     res.render('404', { user: req.user })
