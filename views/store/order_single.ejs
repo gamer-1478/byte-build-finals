@@ -1,8 +1,52 @@
-<h2>Items</h2>
+<h1>Your Order</h1>
+<br>
 <div>
-    <% products.map(product=>{%>
-    <p> Product: <%=product.name%> </p>
-    <p> Quantity: <%=product.quantity%> </p>
-    <%})%>
+    <h3>Ordered By: <%= order.name %>  </h3>
+    <h3>Ordered On: <%= order.date %>  </h3>
+        <div class="content">
+            <% products.map(product=>{%>
+                <p> <a href="<%-order.orderId%>"> Product: <%=product.name%></a> </p>
+                <p> Quantity: <%=product.quantity%> </p>
+                <%})%>            
+        </div>
+    <p class="total"> Total: <%=total%></p>
 </div>
-<p> Total: <%=total%> </p>
+
+<style>
+    h1{
+        margin-top: 30px;
+        font-family: 'Inter';
+        font-size: 4rem
+    }
+    h3{
+        padding-top: 10px;
+    }
+    p{
+        padding-top: 10px;
+    }
+    div{
+        text-align: center;
+        align-items: center;
+    }
+    a{
+        text-decoration: none;
+    }
+    .total{
+        font-size: 2rem;
+        font-family: 'Inter';
+        font-weight: 500;
+    }
+    .content{
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 20px;
+        width: 60%;
+        border: 5px solid #111;
+        padding: 10px;
+        width: 600px;
+        min-height: 200px;
+        border-radius: 25px;
+        background: #eee;
+        color: #111;
+    }
+</style>

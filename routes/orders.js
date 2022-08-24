@@ -47,7 +47,7 @@ router.get('/:id', async (req, res) => {
             total += product.price * product.quantity
         })
         res.render('store/order_single', {
-            products, user: req.user, total
+            products, user: req.user, total, order
         })
     }
 

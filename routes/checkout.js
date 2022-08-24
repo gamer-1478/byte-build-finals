@@ -92,6 +92,7 @@ router.post('/', ensureAuthenticated, async (req, res) => {
 router.get('/confirm-order/:id', ensureAuthenticated, async (req, res) => {
     const { id } = req.params;
     const order = await Order.findOne({ stripe_hidden: id })
+    let total = 0
     if (order && order.status == false) {
         await Order.findOneAndUpdate({ stripe_hidden: id }, {status: true}).then((order) => {
             var products = order.cart.map(async (product_orig) => {
