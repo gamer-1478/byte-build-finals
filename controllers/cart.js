@@ -41,15 +41,5 @@ const cart_quantity_change = (req, res)=> {
     res.send({ success: true });
 }
 
-const quantity_post = (req, res)=> {
-    var id = req.params.id;
-    var cart = req.user.cart;
-    var index = cart.findIndex(product => product.prodid === id);
-    cart[index].quan = req.body.quantity;
-    req.user.cart = cart;
-    req.user.save();
-    res.send({ success: true });
-}
 
-
-module.exports = {cart_get, cart_delete, cart_quantity_change, quantity_post}
+module.exports = {cart_get, cart_delete, cart_quantity_change}

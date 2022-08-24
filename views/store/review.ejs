@@ -14,4 +14,12 @@
         <textarea name="comment" id="comment" cols="40" rows="10"></textarea>
         <button type="submit">Publish Review</button>
     </form>
+<br><br>
+    <% reviews.forEach(review => { %>
+        <p> <strong> <%= review.name %>  </strong> </p>
+        <p> <%= review.rating %> </p>
+        <p> <%= review.comment %> </p>
+        <p> <%= review.verified %> </p>
+    <% }) %> 
+
 </div>

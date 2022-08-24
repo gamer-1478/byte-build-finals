@@ -21,9 +21,9 @@ const landing = require('./routes/landing.js'),
     dashboard = require('./routes/dashboard.js'),
     checkout = require('./routes/checkout.js'),
     admin = require('./routes/admin.js');
-    cart = require('./routes/cart.js');
     product = require('./routes/product.js');
     review = require('./routes/review.js');
+    orders = require('./routes/orders.js');
 
 const app = express(),
     PORT = process.env.PORT || 5000;

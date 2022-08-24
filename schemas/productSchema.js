@@ -14,7 +14,8 @@ const productSchema = new mongoose.Schema({
     reviews:[{
         rating: reqNum,
         comment: notreqString,
-        verified: {type: Boolean, default: false, required: true}
+        verified: {type: Boolean, default: false, required: true},
+        name: reqString,
     }]
 })
 

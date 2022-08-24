@@ -5,9 +5,17 @@ const { nanoid } = require("nanoid")
 
 //main page
 const store = async (req, res) => {
-    var products = await Product.find({})
-    products = JSON.parse(JSON.stringify(products))
-    res.render("store/store", { user: req.user, products: await NewtestArray(products) })
+    const query = req.query.type
+    types = ["new", "western", "indian", "snacks"]
+    if(!query || !types.includes(query)){
+        var products = await Product.find({})
+        products = JSON.parse(JSON.stringify(products))
+        res.render("store/store", { user: req.user, products: await NewtestArray(products) })
+    }else{
+        var products = await Product.find({type: query})
+        products = JSON.parse(JSON.stringify(products))
+        res.render("store/store", { user: req.user, products: await NewtestArray(products) })
+    }
 }
 
 //each item view
