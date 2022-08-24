@@ -6,13 +6,16 @@ const mongoose = require('mongoose'),
     reqNum = { type: Number, required: true }
 
 const orderSchema = new mongoose.Schema({
+    name: reqString,
     orderId: reqString,
+    stripe_hidden: reqString,
     line1: reqString,
     line2: notreqString,
     line3: notreqString,
-    card: reqString,
+    payment_link: reqString,
     date: reqString,
-    name: reqString,
+    userId: reqString,
+    status: {type: Boolean, default: false},
     cart: [{ prodid: nonreqString, quan: 0 }],
 
 })

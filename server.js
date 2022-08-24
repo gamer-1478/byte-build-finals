@@ -20,9 +20,9 @@ const landing = require('./routes/landing.js'),
     cart = require('./routes/cart.js'),
     dashboard = require('./routes/dashboard.js'),
     checkout = require('./routes/checkout.js'),
-    admin = require('./routes/admin.js');
-    product = require('./routes/product.js');
-    review = require('./routes/review.js');
+    admin = require('./routes/admin.js'),
+    product = require('./routes/product.js'),
+    review = require('./routes/review.js'),
     orders = require('./routes/orders.js');
 
 const app = express(),
