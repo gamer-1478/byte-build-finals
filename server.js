@@ -58,3 +58,9 @@ app.get('/404', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`)
 })
+
+
+//Todo
+//repurpose cart and ecom from pokemon app
+//customer can review products.
+//
