@@ -8,7 +8,9 @@
         <p> <%=order.line2%> </p>
         <p> <%=order.line3%> </p>
         <p> Ordered on: <strong><%=order.date%></strong> </p>
-        <p> <%=order.status %>  </p>
+        <% if(!order.status){%> 
+            <a href="<%=order.payment_link%>">Pay Now</a>
+        <% } %> 
 
     </div>
 </a>
