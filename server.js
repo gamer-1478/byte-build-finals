@@ -16,6 +16,10 @@ const express = require('express'),
 //routes
 const landing = require('./routes/landing.js'),
     auth = require('./routes/auth.js'),
+    store = require('./routes/store.js'),
+    cart = require('./routes/cart.js'),
+    dashboard = require('./routes/dashboard.js'),
+    checkout = require('./routes/checkout.js'),
     admin = require('./routes/admin.js');
 
 const app = express(),
@@ -47,9 +51,13 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 //main
-app.use('/', landing) //done
-app.use('/auth', auth) //domne
-app.use('/admin', admin) //add pages
+app.use('/', landing)
+app.use('/auth', auth)
+app.use('/admin', admin)
+app.use('/dashboard', dashboard)
+app.use('/cart', cart)
+app.use('/store', store)
+app.use('/checkout', checkout)
 
 app.get('/404', (req, res) => {
     res.render('404', { user: req.user })

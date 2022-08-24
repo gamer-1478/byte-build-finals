@@ -1,5 +1,5 @@
 const Product = require("../schemas/productSchema"),
-    User = require("../schemas/userSchema"),
+    User = require("../schemas/userSchema");
 
 const cart_get = (req, res)=> {
     if (!req.user.cart.length > 0) {
@@ -38,10 +38,6 @@ const cart_quantity_change = (req, res)=> {
     req.user.cart = cart;
     req.user.save();
     res.send({ success: true });
-}
-
-const admin_add_product = (req, res) => {
-    
 }
 
 module.exports = {cart_get, cart_delete, cart_quantity_change}
