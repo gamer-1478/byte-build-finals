@@ -3,7 +3,7 @@
         <div class="landing-brand">
             <h1 class="landing-title">Craving Superhero Food? <br>We Are Here!</h1>
             <button class="buy-now"
-                onclick="new function(){window.location.href = '/store/view/tGMPBBIkD_QLlpPwDaE_o'}">Start
+                onclick="new function(){window.location.href = '/store'}">Start
                 Shopping</button>
             <div class="branding-custom-container">
                 <div class="branding-custom">
@@ -92,11 +92,14 @@
     }
 
     @media screen and (max-width: 760px) {
-        .landing-brand {
+        .branding-custom-container {
+            width: 100%;
+        }
+        .left-right {
+            flex-direction: column;
+        }
+        .landing-brand, .landing-brand-end{
             width: 80%;
-            padding: 10px;
-            padding-left: 20px;
-            padding-bottom: 20px;
         }
 
         .landing-title {
