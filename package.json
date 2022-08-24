@@ -26,7 +26,7 @@
     "flash": "^1.1.0",
     "formidable": "^2.0.1",
     "jsonwebtoken": "^8.5.1",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "mongoose": "^6.2.7",
     "multer": "^1.4.5-lts.1",
     "nanoid": "^3.3.4",
