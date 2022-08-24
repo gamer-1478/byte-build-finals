@@ -1,11 +1,6 @@
 const Product = require('../schemas/productSchema')
     Order = require('../schemas/orderSchema')
     User = require('../schemas/userSchema')
-const review_get = async(req, res)=>{
-    const product = await Product.findOne({productId: req.params.id})
-    const reviews = product.reviews
-    res.render('store/review', {product, reviews})
-}
 
 const review_post = async(req, res)=>{
     const user = await User.findOne({userId: req.user.userId})
@@ -39,6 +34,5 @@ const review_post = async(req, res)=>{
 }
 
 module.exports = {
-    review_get,
     review_post
 }

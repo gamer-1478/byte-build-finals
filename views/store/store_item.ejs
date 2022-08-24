@@ -17,8 +17,74 @@
     </div>
 </div>
 
+<div class="reviews-container">
+    <h1 class="main-name">Reviews</h1>
+    <form class="review-form" action="/review/<%-product.productId%>" method="post">
+        <label for="rating">Rate The Product</label>
+        <select name="rating" id="rating" required="true">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <br><br>
+        <label for="comment">Write a review</label>
+        <br>
+        <textarea name="comment" id="comment" cols="60" rows="5"></textarea><br>
+        <button class="pay-later" type="submit">Publish Review</button>
+    </form>
+    <br><br>
+    <div>
+        <% product.reviews.forEach(review => { %>
+        <div class="each-comment">
+            <h2> By: <strong> <%= review.name %> </strong>, Rating: <%= review.rating %> </h2>
+            <% if (review.verified == true){ %>
+            <p style="color: #16e15e;">Verified</p>
+            <% }else{ %>
+            <p style="color: red;">Not Verified</p>
+            <% }%>
+            <h5> <%= review.comment %> </h5>
+        </div>
+        <% }) %>
+        <br><br>
+    </div>
+</div>
+
 
 <style>
+    .each-comment {
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #eee;
+        border-radius: 10px;
+    }
+    .pay-later {
+        z-index: 1;
+        width: max-content;
+        height: max-content;
+        margin-top: 20px;
+        padding: 6px;
+        background: #111;
+        color: #eee;
+        cursor: pointer;
+        font-size: 19px;
+        border: none;
+        border-radius: 7px;
+    }
+
+    .review-form {
+        margin-top: 20px;
+    }
+
+    .reviews-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
     .price {
         font-size: 2em;
     }
@@ -55,6 +121,7 @@
     .description {
         font-weight: 500;
         width: 80%;
+        white-space: pre-line;
     }
 
     .right-side {

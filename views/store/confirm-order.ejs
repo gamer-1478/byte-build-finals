@@ -1,23 +1,52 @@
-<div class="subtotal">
-    <h1 class="subtotal-title">Subtotal</h1>
-    <h3> ₹<%=total%></h3>
-    <div class="subtotal-cart">
-        <% if (cart.length > 0) { %>
-        <% for (let i = 0; i < cart.length; i++) { %>
-        <div class="subtotal-value"><span class="bold"><%= cart[i].name %>:</span>
-            ₹<%= cart[i].quantity*cart[i].price %>
+<div class="confirm-order-main">
+    <h1 class="title">Thank you! Your order has been confirmed</h1>
+    <div class="subtotal">
+
+        <h1 class="subtotal-title">Subtotal</h1>
+        <h3>₹<%=total%></h3>
+        <div class="subtotal-cart">
+            <% if (cart.length > 0) { %>
+            <% for (let i = 0; i < cart.length; i++) { %>
+            <div class="subtotal-value"><span class="bold"><%= cart[i].name %>:</span>
+                ₹<%= cart[i].quantity*cart[i].price %>
+            </div>
+            <% } %>
+            <% } else { %>
+            <div class="subtotal-value">₹0</div>
+            <% } %>
         </div>
-        <% } %>
-        <% } else { %>
-        <div class="subtotal-value">₹0</div>
-        <% } %>
     </div>
+    <button onclick="new function(){window.location.href='/dashboard'}" class="pay-later">
+        Continue
+    </button>
 </div>
 
-
-<h1>Thank you! Your order has been confirmed</h1>
-
 <style>
+    .pay-later {
+        z-index: 1;
+        width: max-content;
+        height: max-content;
+        margin-top: 20px;
+        padding: 6px;
+        background: #111;
+        color: #eee;
+        cursor: pointer;
+        font-size: 19px;
+        border: none;
+        border-radius: 7px;
+    }
+
+    .title {
+        margin-top: 20px;
+    }
+
+    .confirm-order-main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
     .checkout-container {
         width: 100%;
         min-height: 100%;
