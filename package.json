@@ -33,6 +33,7 @@
     "nodemailer": "^6.7.4",
     "nodemon": "^2.0.15",
     "passport": "^0.5.2",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "stripe": "^10.4.0"
   }
 }

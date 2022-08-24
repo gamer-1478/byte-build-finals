@@ -61,7 +61,7 @@
         width: 100% !important;
         margin-top: 20px;
     }
-    
+
     .subtotal-cart {
         margin-top: 30px;
         display: flex;
@@ -226,6 +226,10 @@
 </script>
 
 <style>
+    .cart-item-image img {
+        padding: 10px;
+    }
+
     @media screen and (max-width: 770px) {
         .super-container {
             display: flex;
@@ -243,14 +247,17 @@
             align-items: center;
             justify-content: center;
         }
+
         .cart-item {
             margin: 0px;
             width: 90%;
             height: 140px;
         }
+
         .cart-item-image img {
             width: 100px !important;
         }
+
         .subtotal {
             width: 85%;
             margin: 10px;
@@ -260,6 +267,7 @@
             align-items: flex-start;
             align-self: center;
         }
+
         .cart-item-details {
             height: 100%;
         }

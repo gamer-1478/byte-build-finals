@@ -33,12 +33,8 @@
             <label for="email">Line 3</label>
             <input type="text" id="line3" name="line3" placeholder="Near xyz farm">
         </div>
-        <h2>Credit/Debit Card</h2>
-        <div class="field">
-            <input type="text" id="card" name="card" placeholder="0123123423453456">
-        </div>
 
-        <input type="button" value="proceed" onclick="submit();" class="signup-button" />
+        <input type="button" value="Confirm Purchase" onclick="submit();" class="signup-button" />
     </div>
 
 </div>
@@ -65,7 +61,7 @@
         background-color: #393E47;
         color: white;
         border-radius: 5px;
-        width: 130px;
+        width: max-content;
         height: 50px;
         font-size: 18px;
         font-weight: 600;
@@ -156,13 +152,11 @@
         let line1 = document.getElementById("line1").value;
         let line2 = document.getElementById("line2").value;
         let line3 = document.getElementById("line3").value;
-        let card = document.getElementById("card").value;
         let data = {
             name: name,
             line1: line1,
             line2: line2,
-            line3: line3,
-            card: card
+            line3: line3
         };
         let response = await fetch("/checkout", {
             method: "POST",
@@ -174,7 +168,9 @@
         let result = await response.json();
         console.log(result);
         if (result.success == true) {
-            window.location.href = "/dashboard";
+            window.open(
+            result.link,'_blank'); // in future this will open in the same tab. 
+            window.location.href = '/dashboard';
         } else {
             notyf.error(result.message);
         }
