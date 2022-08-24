@@ -10,16 +10,17 @@ const express = require('express'),
     stripe_req = require('stripe'),
     Order = require('../schemas/orderSchema');
 
-const stripe = stripe_req('sk_test_51Eig0GDHsu3wcW296Ka1PdBZCly0QTpnbGAyo69DBd7ue4cw2G8GZIs3ZAIsMqsn5k8dVJKgXDjFtKRRB4rd1xa700ZrqxmSPr');
+const stripe = stripe_req(process.env.STRIPE);
 
-const paymentLink = async (orderid, req) => {
+const paymentLink = async (orderid, req, lineItems) => {
     return await stripe.paymentLinks.create({
-        line_items: [
-            {
-                price: 'price_1LaCP2DHsu3wcW29MLZXXVc0',
-                quantity: 1,
-            },
-        ],
+        line_items: lineItems,
+        // line_items: [
+        //     {
+        //         price: 'price_1LaCP2DHsu3wcW29MLZXXVc0',
+        //         quantity: 1,
+        //     },
+        // ],
         after_completion: { type: 'redirect', redirect: { url: req.protocol + '://' + req.get('host') +'/checkout/confirm-order/'+orderid } },
     }).then((link) => {
         return link;
@@ -51,11 +52,18 @@ router.post('/', ensureAuthenticated, async (req, res) => {
     const user = await User.findOne({ userId: req.user.userId })
     const orderId = nanoid()
     const stripe_hidden = nanoid() + nanoid()
-    const link = await paymentLink(stripe_hidden, req);
-
-    if (!line1 || !line2 || line3 || !name) {
+    if (!line1 || !line2 || !line3 || !name) {
         return res.send({message: "Please fill in all fields", success: false})
     }
+    
+    var products = req.user.cart.map(async (product_orig) => {
+        var product = await Product.findOne({ productId: product_orig.prodid })
+        product = JSON.parse(JSON.stringify(product))
+        return { price: product.stripe_price, quantity: product_orig.quan };
+    })
+
+    const link = await paymentLink(stripe_hidden, req, await Promise.all(products).then((products) => { return products }));
+
     const newOrder = new Order({
         name,
         orderId,
@@ -69,7 +77,6 @@ router.post('/', ensureAuthenticated, async (req, res) => {
         cart: user.cart,
         date: dateStringWithTime
     })
-
 
     newOrder.save().then(async (order) => {
         await User.findOneAndUpdate(

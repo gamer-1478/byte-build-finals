@@ -1,7 +1,9 @@
 const Product = require("../schemas/productSchema")
 const User = require("../schemas/userSchema")
 const { nanoid } = require("nanoid")
+const stripe_req = require('stripe')
 
+const stripe = stripe_req(process.env.STRIPE)
 
 //main page
 const store = async (req, res) => {
@@ -24,7 +26,7 @@ const store_item_view = async (req, res) => {
     res.render("store/store_item", { user: req.user, product })
 }
 
-// cart mechanism [BROKEN TO FIX!]
+// cart mechanism
 const store_item_buy = async (req, res) => {
     const product = await Product.findOne({ productId: req.params.id })
     const user = await User.findOne({ _id: req.user._id })
@@ -60,7 +62,7 @@ const store_admin = async (req, res) => {
 }
 
 // admin make product
-const store_admin_create = (req, res) => {
+const store_admin_create = async (req, res) => {
     const { name, quantity, type, description, price, image } = req.body
     var errors = [];
     if (!name || !quantity || !type || !description || !price || !image) {
@@ -69,7 +71,6 @@ const store_admin_create = (req, res) => {
     Product.findOne({ name: name }).then(product => {
         if (product) {
             errors.push({ msg: "Product already exists" })
-
         }
     })
     if (errors.length > 0) {
@@ -77,7 +78,19 @@ const store_admin_create = (req, res) => {
         return res.send(errors)
     }
     const productId = nanoid()
-    const newProduct = new Product({
+    const product_stripe = await stripe.products.create({
+        name: name,
+        images: [image],
+    });
+
+    const price_str = await stripe.prices.create({
+        unit_amount: parseInt(price)*100,
+        currency: 'inr',
+        product: product_stripe.id,
+    });
+
+    const newProduct = await new Product({
+        stripe_price: await price_str.id,
         name,
         quantity,
         type,

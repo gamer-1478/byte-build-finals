@@ -11,6 +11,7 @@ const productSchema = new mongoose.Schema({
     productId: reqString,
     image: notreqString,
     price: reqNum,
+    stripe_price: reqString,
     reviews:[{
         rating: reqNum,
         comment: notreqString,

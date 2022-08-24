@@ -4,30 +4,110 @@
         <h2 class="dash-your"><%= user.name %>'s Account </h2><br><br><br>
         <div class="dash-button-list-container">
             <div class="dash-button-list">
-                <button>Previous Orders</button>
-                <button>Payment Options</button>
-                <button>Your Adresses</button>
+                <div class="button-click" onclick="new function(){window.location.href='/orders';}">
+                    <img src="https://cdn1.iconfinder.com/data/icons/ios-11-glyphs/30/order-512.png">
+                    <div class="button-click-details">
+                        <h3>Previous Orders</h3>
+                        <p>Track Orders, Complete Payments</p>
+                    </div>
+                </div>
+                <div class="button-click" onclick="later()">
+                    <img src="https://static.thenounproject.com/png/1890471-200.png">
+                    <div class="button-click-details">
+                        <h3>Payment Options</h3>
+                        <p>Edit or add payment options! &nbsp;</p>
+                    </div>
+                </div>
+                <div class="button-click" onclick="later()">
+                    <img src="https://static.thenounproject.com/png/1890471-200.png">
+                    <div class="button-click-details">
+                        <h3>Your Address</h3>
+                        <p>Add or save address for your future orders.</p>
+                    </div>
+                </div>
             </div>
             <div class="dash-button-list">
-                <button>Contact Us</button>
-                <button>Misepal Balance</button>
-                <button>Your Adresses</button>
+                <div class="button-click" onclick="later()">
+                    <img src="https://static.thenounproject.com/png/2587327-200.png">
+                    <div class="button-click-details">
+                        <h3>Contact Us</h3>
+                        <p>Contact us for any queries.</p>
+                    </div>
+                </div>
+                <div class="button-click" onclick="later()">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1250/1250689.png">
+                    <div class="button-click-details">
+                        <h3>Profile</h3>
+                        <p>Edit login, name, image, mobile number etc.</p>
+                    </div>
+                </div>
+                <div class="button-click" onclick="new function(){window.location.href = '/auth/logout'}">
+                    <img src="https://cdn-icons-png.flaticon.com/512/126/126467.png">
+                    <div class="button-click-details">
+                        <h3>Logout</h3>
+                        <p>Logout of your account.</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <a href="/orders"></a>
-        <a href="/auth/logout">Logout</a>
     </div>
 </div>
 <style>
     .dash-button-list-container {
         display: flex;
         flex-direction: column;
+        justify-content: flex-start;
+        width: 100%;
     }
 
     .dash-button-list {
         display: flex;
         flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+
+    .button-click {
+        margin: 10px;
+        border-radius: 10px;
+        background-color: #f5f5f5;
+        border: none;
+        font-size: 20px;
+        font-weight: 600;
+        color: #000;
+        display: flex;
+        width: 350px;
+        cursor: pointer;
+    }
+
+    .button-click img {
+        width: 70px;
+        height: 70px;
+        margin: 20px;
+    }
+
+    .button-click-details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
         justify-content: center;
+        padding-right: 30px;
+    }
+
+    .button-click-details h3 {
+        font-size: 22px;
+        font-size: 'Josh', sans-serif;
+        font-weight: 600;
+        color: #020202;
+    }
+
+    .button-click-details p {
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 10px;
+        color: #696969;
+        font-family: 'Inter', sans-serif;
     }
 
     .dash-your {
@@ -46,16 +126,36 @@
     .dash-title {
         text-align: center;
         font-size: 52px;
-        font-family: 'Inter', sans-serif;
+        font-family: 'Outfit', sans-serif;
         font-weight: 300;
         margin-top: 30px;
         margin-bottom: 30px;
     }
 
     .dashboard-container {
-        width: 90%;
+        width: 75%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    @media screen and (max-width: 760px) {
+        .dashboard-container {
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dash-button-list {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0px;
+        }
+
+        .dash-button-list-container {
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
     }
 </style>
