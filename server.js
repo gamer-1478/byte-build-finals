@@ -62,6 +62,7 @@ app.use('/cart', cart)
 app.use('/store', store)
 app.use('/checkout', checkout)
 app.use('/review', review)
+app.use('/orders', orders)
 
 app.get('/404', (req, res) => {
     res.render('404', { user: req.user })

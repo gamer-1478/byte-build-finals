@@ -33,5 +33,27 @@ router.get('/', async (req, res) => {
     setTimeout(render, 1000);
 })
 
+router.get('/:id', async (req, res) => {
+    const order = await Order.findOne({orderId: req.params.id})
+    let products = []
+    let total = 0
+    order.cart.map(async product =>{
+        let foundProd = await Product.findOne({productId: product.prodid})
+        products.push(foundProd)
+    })
+    
+
+      function render() {
+        products.map(product => {
+            total+=product.price*product.quantity
+        })
+        res.render('store/order_single', {
+            products, user: req.user, total
+        })
+    }
+
+    setTimeout(render, 1000)
+})
 
 module.exports = router
+
