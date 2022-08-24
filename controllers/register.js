@@ -1,6 +1,7 @@
 const User = require("../schemas/userSchema.js"),
   bcrypt = require("bcrypt"),
-  { nanoid } = require("nanoid")
+  { nanoid } = require("nanoid"),
+  passport = require('passport');
 
 const auth_register_get = (req, res) => {
   res.render("auth/register", { title: "Register" });
@@ -44,10 +45,10 @@ const auth_register_post = async (req, res) => {
                 else {
                   req.logIn(user, (err) => {
                     if (err) throw err;
-                    res.send([{ msg: "Successfully Authenticated", sucess: true }]);
+                    res.send([{ msg: "Successfully Authenticated", success: true }]);
                   });
                 }
-              })(req, res, next);
+              })(req, res);
             })
           }).catch((err) => console.log(err));
         })
