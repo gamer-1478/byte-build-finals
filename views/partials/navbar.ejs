@@ -29,10 +29,12 @@
         </ul>
         <div class="right-side-nav">
             <div class="search-input-div">
-                <input type="text" class="search-input" placeholder="Search">
-                <img class="search-icon" alt="search"
-                    src="https://cdn.discordapp.com/attachments/1005877818586038424/1006499467207381062/search.png"
-                    width="20px" />
+                <form action="/search" method="post">
+                    <input type="text" class="search-input" placeholder="Search" name="search" id="search">
+                    <img class="search-icon" alt="search"
+                        src="https://cdn.discordapp.com/attachments/1005877818586038424/1006499467207381062/search.png"
+                        width="20px" onClick="sendData()"/>
+                </form>
             </div>
             <% if (typeof user != "undefined"){ %>
             <a href="/cart"><img width="28px" style="filter:invert(100%)"
@@ -240,4 +242,7 @@
         hamburger.classList.remove("active");
         navMenu.classList.remove("active");
     }))
+
+    
+
 </script>
