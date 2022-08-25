@@ -29,12 +29,11 @@
         </ul>
         <div class="right-side-nav">
             <div class="search-input-div">
-                <form action="/search" method="post">
-                    <input type="text" class="search-input" placeholder="Search" name="search" id="search">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search" name="search" id="search" />
                     <img class="search-icon" alt="search"
                         src="https://cdn.discordapp.com/attachments/1005877818586038424/1006499467207381062/search.png"
-                        width="20px" onClick="sendData()"/>
-                </form>
+                        width="20px" onclick="sendData()"/>
+
             </div>
             <% if (typeof user != "undefined"){ %>
             <a href="/cart"><img width="28px" style="filter:invert(100%)"
@@ -243,6 +242,11 @@
         navMenu.classList.remove("active");
     }))
 
+    function sendData(){
+        const searchInput = document.getElementById("searchInput")
+        const payload = searchInput.value
+        window.location.href = 'http://localhost:5000/store/search?search='+payload
+    }
     
 
 </script>
