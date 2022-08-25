@@ -11,7 +11,7 @@ const profile_update = async (req, res) => {
         name,
         email
     }).then((user) => {
-        res.redirect('/profile')
+        res.send({success: true, msg: "Profile updated"})
     })
 
 }

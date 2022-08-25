@@ -1,52 +1,241 @@
-<h1>Your Order</h1>
-<br>
-<div>
-    <h3>Ordered By: <%= order.name %>  </h3>
-    <h3>Ordered On: <%= order.date %>  </h3>
+<div class="store-main-container">
+    <h1>Your Order</h1>
+    <br>
+    <div class="order-div">
+        <h3>Ordered By: <%= order.name %> </h3>
+        <h3>Ordered On: <%= order.date %> </h3>
         <div class="content">
-            <% products.map(product=>{%>
-                <p> <a href="<%-order.orderId%>"> Product: <%=product.name%></a> </p>
-                <p> Quantity: <%=product.quantity%> </p>
-                <%})%>            
+            <% for (let i = 0; i < products.length; i++) { %>
+            <div class="cart-item" onclick="new function(){window.location.href = '/store/view/<%= products[i].productId%>'}">
+                <div class="cart-item-image">
+                    <img width="155px" src="<%= products[i].image %>" alt="<%= products[i].name %>">
+                </div>
+                <div class="cart-item-details">
+                    <div class="cart-item-left">
+                        <div class="cart-item-name"><%= products[i].name %></div>
+                        <div class="cart-item-quantity">
+                            <div class="buy-form" method="post">
+                                <p><%= products[i].quantity %></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart-item-right">
+                        <div class="cart-item-price">
+                            <span class="cart-item-value">₹<%= products[i].price %></span>
+                        </div>
+                        <div class="cart-item-price">
+                            <span class="cart-item-label">Total:</span>
+                            <span class="cart-item-value">₹<%= products[i].quantity*products[i].price %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+
         </div>
-    <p class="total"> Total: <%=total%></p>
+        <p class="total"> Total: <%=total%></p>
+    </div>
 </div>
 
 <style>
-    h1{
+    .order-div {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .store-main-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 100%;
+    }
+
+    h1 {
         margin-top: 30px;
         font-family: 'Inter';
         font-size: 4rem
     }
-    h3{
+
+    h3 {
         padding-top: 10px;
     }
-    p{
+
+    p {
         padding-top: 10px;
     }
-    div{
-        text-align: center;
-        align-items: center;
-    }
-    a{
-        text-decoration: none;
-    }
-    .total{
+
+    .total {
         font-size: 2rem;
         font-family: 'Inter';
         font-weight: 500;
     }
-    .content{
+
+    .content {
         margin: auto;
         margin-top: 50px;
-        margin-bottom: 20px;
+        margin-bottom: 50px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<style>
+    .bold {
+        font-weight: bold;
+    }
+
+    .cart-item-label {
+        font-weight: bold;
+    }
+
+    .cart-item-details {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .cart-item-right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-right: 20px;
+    }
+
+    .buy-form input {
+        width: 70px;
+        height: 30px;
+        padding-left: 10px;
+        font-size: 15px;
+        padding-right: 5px;
+        border-radius: 9px;
+        border: 1px solid #111;
+    }
+
+    .buy-form {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        height: 70%;
+    }
+
+    .main-cart-container {
+        display: flex;
+        flex-direction: column;
         width: 60%;
-        border: 5px solid #111;
+        height: 100%;
+        align-self: flex-start;
+        margin-left: 50px;
+    }
+
+    .subtotal {
+        display: flex;
+        flex-direction: column;
+        width: 20%;
+        min-height: 30vh;
+        align-self: flex-start;
+        margin-left: 30px;
+        background-color: #eee;
+        border-radius: 10px;
         padding: 10px;
-        width: 600px;
-        min-height: 200px;
-        border-radius: 25px;
-        background: #eee;
-        color: #111;
+        padding-left: 30px;
+    }
+
+    .main-cart {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .super-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .cart-item {
+        display: flex;
+        align-items: center;
+        margin: 10px;
+        background-color: #eee;
+        padding: 10px;
+        border-radius: 14px;
+    }
+
+    .cart-item-name {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .main-title {
+        font-size: 3em;
+        margin: 20px;
+    }
+</style>
+
+<style>
+    .cart-item-image img {
+        padding: 10px;
+    }
+
+    @media screen and (max-width: 770px) {
+        .order-div {
+            width: 100%;
+        }
+
+        .super-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+        }
+
+        .main-cart-container {
+            width: 100%;
+            margin: 0px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-item {
+            margin: 20px;
+            padding: 20px;
+            width: 80%;
+            height: max-content;
+        }
+
+        .cart-item-image img {
+            width: 100px !important;
+        }
+
+        .subtotal {
+            width: 85%;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            align-self: center;
+        }
+
+        .cart-item-details {
+            height: 100%;
+        }
     }
 </style>

@@ -7,7 +7,6 @@ const express = require('express'),
 router.get('/', store)
 router.get('/view/:id', store_item_view)
 router.post('/buy/:id', store_item_buy)
-router.post('/search', ensureAuthenticated, store_search)
 
 //store admin routes
 router.get('/admin', ensureAdminAuthenticated, store_admin)

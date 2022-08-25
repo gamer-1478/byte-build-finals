@@ -23,7 +23,7 @@ const landing = require('./routes/landing.js'),
     admin = require('./routes/admin.js'),
     product = require('./routes/product.js'),
     review = require('./routes/review.js'),
-    orders = require('./routes/orders.js');
+    orders = require('./routes/orders.js'),
     profile = require('./routes/profile.js');
 
 const app = express(),
