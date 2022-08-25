@@ -1,17 +1,10 @@
 <div class="store">
-    <div class="search-div">
-        <input type="text" placeholder="Search">
-        <img class="search-icon" alt="search"
-        src="https://cdn.discordapp.com/attachments/1005877818586038424/1006499467207381062/search.png"
-        width="20px" onClick="sendData()"/>
-    </div>
 
+    
     <div class="store-landing">
         <h1 class="landing-title">Craving superfood? Its all here!</h1>
     </div>
     
-
-    <div id="searchResults"></div>
 
     <% products.forEach(productlist=>{%>
     <div class="productlist">
@@ -153,40 +146,10 @@
         background-color: transparent;
     }
 
-    .search-div{
-        margin-top: 20px;
-    }
-
 </style>
 
 <script>
     function change(productId) {
         window.location.href = "/store/view/" + productId;
     }
-
-    function sendData(){
-        const searchResults = document.getElementById("searchResults");
-        const search = document.getElementById("search");
-        const payload = search.value
-        if(payload == ' ' || payload==''){
-            searchResults.innerHTML = '';
-        }else{
-            fetch('/assignments/search', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({payload:payload})
-            }).then(res=> res.json()).then(data =>{
-                let results = data.results;
-                searchResults.innerHTML = ''
-                if(results.length > 1) searchResults.innerHTML('<p>No search results found!</p>')
-                results.forEach((result, index) => {
-                    if(index > 0) searchResults.innerHTML += '<hr>'
-                    searchResults.innerHTML += `<a href="/assignments/${result.id}" <h3> ${result.title} </h3>`
-                }); 
-            })
-        }
-
-        
-        }
-
 </script>

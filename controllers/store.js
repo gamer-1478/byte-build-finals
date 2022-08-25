@@ -172,6 +172,13 @@ async function NewtestArray(products) {
     return NewtestArray
 }
 
+const store_search = async (req, res) => {
+    const query = req.query.search
+    let search = await Product.find({name: {$regex: new RegExp('^'+query+'.*', 'i')}}).exec()
+    console.log(search)
+    res.render('store/store', { user: req.user, products: await NewtestArray(search) })
+}
+
 module.exports = {
     store,
     store_admin,
@@ -180,5 +187,6 @@ module.exports = {
     store_admin_post_product,
     store_admin_delete_product,
     store_item_view,
-    store_item_buy
+    store_item_buy,
+    store_search
 }
