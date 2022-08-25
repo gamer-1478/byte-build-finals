@@ -10,14 +10,16 @@ router.get('/', async (req, res) => {
     for (let i = 0; i < user.orders.length; i++) {
         let foundOrder = await Order.findOne({ orderId: user.orders[i] })
         foundOrder = foundOrder.toObject()
-        var total = 0;
-        var products = foundOrder.cart.map(async (product_orig) => {
-            var product = await Product.findOne({ productId: product_orig.prodid })
-            product = JSON.parse(JSON.stringify(product))
-            total += product.price * product_orig.quan
-            product.quantity = product_orig.quan
-            return product;
+        foundOrder = JSON.parse(JSON.stringify(foundOrder))
+        let total = 0
+        var products = foundOrder.cart.map(async product => {
+            let foundProd = await Product.findOne({ productId: product.prodid })
+            foundProd = JSON.parse(JSON.stringify(foundProd))
+            total += foundProd.price * product.quan
+            foundProd.quantity = product.quan
+            return (foundProd)
         })
+
         Promise.all(await products).then(async products => {
             foundOrder.cart = products
             foundOrder.total = total
@@ -44,9 +46,6 @@ router.get('/:id', async (req, res) => {
     })
 
     Promise.all(await products).then(async products => {
-        products.map(product => {
-            total += product.price * product.quantity
-        })
         res.render('store/order_single', {
             products, user: req.user, total, order
         })
