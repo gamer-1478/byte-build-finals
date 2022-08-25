@@ -4,14 +4,14 @@
             <h1>Hello <%=user.name%>!</h1>
             <div class="signup-form">
                 <div class="field">
-                    <label for="email">Name</label>
-                    <input type="text" id="email" value="<%-user.name%>" name="email"
-                        placeholder="Ashok.Kumar@gmail.com">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" value="<%-user.name%>" name="name"
+                        placeholder="Ashok Kumar">
                 </div>
                 <div class="field">
-                    <label for="pass">Email</label>
-                    <input type="text" id="pass" value="<%-user.email%>" name="pass"
-                        placeholder="@$#0kKum@r1234@secure">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" value="<%-user.email%>" name="email"
+                        placeholder="ashok.kumar@gmail.com">
                 </div>
                 <input type="button" value="Update Profile" onclick="submit();" class="signup-button" />
             </div>
@@ -75,7 +75,7 @@
     var notyf = new Notyf();
     async function submit() {
         var email = document.getElementById("email").value;
-        var pass = document.getElementById("pass").value;
+        var name = document.getElementById("name").value;
         await fetch("/profile", {
             method: "POST",
             headers: {
@@ -83,7 +83,7 @@
             },
             body: JSON.stringify({
                 email: email,
-                password: pass
+                name: name
             })
         }).then(async (response) => {
             res = await response.json()
